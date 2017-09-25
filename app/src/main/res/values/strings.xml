@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">RoomToDoSample</string>
+    <string name="title_hint">Enter title</string>
+    <string name="desc_hint">Enter task description</string>
+    <string name="priority_prompt">Choose a priority</string>
+    <string name="submit">Submit</string>
+
+    <string-array name="priorities">
+        <item>MAJOR</item>
+        <item>MINOR</item>
+        <item>TRIVIAL</item>
+    </string-array>
+</resources>
