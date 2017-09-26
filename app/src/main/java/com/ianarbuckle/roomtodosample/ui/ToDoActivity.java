@@ -2,6 +2,7 @@ package com.ianarbuckle.roomtodosample.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.ianarbuckle.roomtodosample.MyApplication;
@@ -41,10 +42,10 @@ public class ToDoActivity extends AppCompatActivity {
   private void fetchTasks() {
     List<Task> tasks = new ArrayList<>();
 
-    for(int i = 0; i < 5; i ++) {
+    for(int i = 0; i < 2; i ++) {
       Task task = new Task();
       task.setTitle("Pickle");
-      task.setDescription("Turn myself into a pickle" + i);
+      task.setDescription("Turn myself into a pickle" + " " + i);
       task.setPriority("Major");
       tasks.add(task);
     }
@@ -52,10 +53,15 @@ public class ToDoActivity extends AppCompatActivity {
     MyApplication.get().getDatabase().taskDao().insertAllTasks(tasks);
 
     populateTasks(tasks);
-
   }
 
   private void populateTasks(List<Task> tasks) {
-    runOnUiThread(() -> recyclerView.setAdapter(new ToDoAdapter(tasks)));
+    runOnUiThread(() -> {
+      recyclerView.setLayoutManager(new LinearLayoutManager(this));
+      ToDoAdapter adapter = new ToDoAdapter(tasks);
+      recyclerView.setAdapter(adapter);
+      adapter.notifyDataSetChanged();
+    });
+
   }
 }

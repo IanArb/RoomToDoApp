@@ -29,7 +29,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
 
   @Override
   public ToDoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_todo, parent);
+    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_todo, parent, false);
     return new ToDoViewHolder(view);
   }
 
@@ -44,6 +44,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
   }
 
   static class ToDoViewHolder extends RecyclerView.ViewHolder {
+
     @BindView(R.id.tvTitle)
     TextView tvTitle;
 
@@ -55,7 +56,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
 
     public ToDoViewHolder(View itemView) {
       super(itemView);
-      ButterKnife.bind(itemView);
+      ButterKnife.bind(this, itemView);
     }
 
     public void bind(Task task) {
