@@ -21,21 +21,30 @@ import butterknife.ButterKnife;
 
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder> {
 
+  private View.OnLongClickListener longClickListener;
+  private View.OnClickListener clickListener;
+
   private List<Task> tasks;
 
-  public ToDoAdapter(List<Task> tasks) {
+  public ToDoAdapter(List<Task> tasks, View.OnLongClickListener longClickListener, View.OnClickListener clickListener) {
     this.tasks = tasks;
+    this.longClickListener = longClickListener;
+    this.clickListener = clickListener;
   }
 
   @Override
   public ToDoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_todo, parent, false);
+    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_todo, parent, false);
     return new ToDoViewHolder(view);
   }
 
   @Override
   public void onBindViewHolder(ToDoViewHolder holder, int position) {
-    holder.bind(tasks.get(position));
+    Task task = tasks.get(position);
+    holder.bind(task);
+    holder.itemView.setTag(task);
+    holder.itemView.setOnLongClickListener(longClickListener);
+    holder.itemView.setOnClickListener(clickListener);
   }
 
   @Override
@@ -43,7 +52,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
     return tasks.size();
   }
 
-  static class ToDoViewHolder extends RecyclerView.ViewHolder {
+  static class ToDoViewHolder extends RecyclerView.ViewHolder  {
 
     @BindView(R.id.tvTitle)
     TextView tvTitle;
@@ -60,9 +69,12 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
     }
 
     public void bind(Task task) {
-      tvTitle.setText(task.getTitle());
-      tvDescription.setText(task.getDescription());
-      tvPriority.setText(task.getPriority());
+      String titleFormat = itemView.getResources().getString(R.string.title_format, task.getTitle());
+      tvTitle.setText(titleFormat);
+      String descriptionFormat = itemView.getResources().getString(R.string.desc_format, task.getDescription());
+      tvDescription.setText(descriptionFormat);
+      String priorityFormat = itemView.getResources().getString(R.string.priority_format, task.getPriority());
+      tvPriority.setText(priorityFormat);
     }
 
   }

@@ -1,9 +1,8 @@
-package com.ianarbuckle.roomtodosample.room.database;
+package com.ianarbuckle.roomtodosample.room;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
-import com.ianarbuckle.roomtodosample.room.dao.TaskDao;
 import com.ianarbuckle.roomtodosample.room.entity.Task;
 
 /**

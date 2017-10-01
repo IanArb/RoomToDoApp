@@ -2,9 +2,8 @@ package com.ianarbuckle.roomtodosample;
 
 import android.app.Application;
 import android.arch.persistence.room.Room;
-import android.content.SharedPreferences;
 
-import com.ianarbuckle.roomtodosample.room.database.MyDatabase;
+import com.ianarbuckle.roomtodosample.room.MyDatabase;
 
 /**
  * Created by Ian Arbuckle on 25/09/2017.
